@@ -4,9 +4,47 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Fuzz"
+        xmlns:controls="clr-namespace:Fuzz.Controls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+        Title="MainWindow" Height="498" Width="294">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Open" Click="MenuItem_Open"/>
+                <MenuItem Header="_Save" Click="MenuItem_Save"/>
+            </MenuItem>
+        </Menu>
+        <Grid>
+            <TabControl>
+                <TabItem>
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Colors" Foreground="Blue" />
+                        </StackPanel>
+                    </TabItem.Header>
+                    <ListView ItemsSource="{Binding Colors}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <controls:ColorListItem />
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </TabItem>
+                <TabItem>
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Properties" Foreground="Red" />
+                        </StackPanel>
+                    </TabItem.Header>
+                    <ListView ItemsSource="{Binding Properties}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <controls:PropertyListItem />
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </TabItem>
+            </TabControl>
+        </Grid>
+    </DockPanel>
 </Window>

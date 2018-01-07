@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +25,25 @@ namespace Fuzz
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void MenuItem_Open(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "Ableton skin files (*.ask)|*.ask"
+            };
+            
+            if (openFileDialog.ShowDialog() == true) Theme.Instance.Parse(File.ReadAllText(openFileDialog.FileName));
+        }
+
+        private void MenuItem_Save(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Filter = "Ableton skin files (*.ask)|*.ask"
+            };
+            //if(saveFileDialog.ShowDialog() == true) File.
         }
     }
 }
