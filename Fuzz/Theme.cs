@@ -231,21 +231,22 @@ namespace Fuzz
                 })
                 .ToDictionary(x => x.Item1, x => x.Item2);
 
-            Properties = abletonElement.Element("SkinManager")
-                .Descendants()
-                .Where(x => x.HasAttributes && !string.IsNullOrWhiteSpace(x.Attribute("Value")?.Value)) // NOTE: This is not great but we get what we are given.
-                .Select(x => {
-                    var name = x.Name.LocalName;
-                    var value = byte.Parse(x.Element("Alpha").Attribute("Value").Value);
+            //Properties = abletonElement.Element("SkinManager")
+            //    .Descendants()
+            //    .Where(x => x.HasAttributes && !string.IsNullOrWhiteSpace(x.Attribute("Value")?.Value)) // NOTE: This is not great but we get what we are given.
+            //    .Select(x => {
+            //        var name = x.Name.LocalName;
+            //        var value = byte.Parse(x.Attribute("Value").Value);
 
-                    return new Tuple<string, PropertyItem>(name, new PropertyItem
-                    {
-                        Value = value
-                    });
-                })
-                .ToDictionary(x => x.Item1, x => x.Item2);
+            //        return new Tuple<string, PropertyItem>(name, new PropertyItem
+            //        {
+            //            Value = value
+            //        });
+            //    })
+            //    .ToDictionary(x => x.Item1, x => x.Item2);
         }
 
+        // TODO: refactor this so its OO and uses a grown up serialiser/ parser
         internal string Serialize()
         {
             var colors = string.Join(Environment.NewLine, Colors.Select(x => $"<{x.Key}>\n<R Value=\"{x.Value.R}\" />\n<G Value=\"{x.Value.G}\" />\n<B Value=\"{x.Value.B}\" />\n<Alpha Value=\"{x.Value.A}\" />\n</{x.Key}>"));

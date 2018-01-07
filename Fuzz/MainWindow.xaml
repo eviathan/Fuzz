@@ -6,7 +6,17 @@
         xmlns:local="clr-namespace:Fuzz"
         xmlns:controls="clr-namespace:Fuzz.Controls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="498" Width="294">
+        Title="MainWindow"
+        Height="498"
+        Width="294"
+        MinHeight="498"
+        MaxHeight="498"
+        MinWidth="294"
+        MaxWidth="294">
+    <Window.Resources>
+        <ResourceDictionary Source="Style.xaml" />
+    </Window.Resources>
+    
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File">
@@ -15,11 +25,11 @@
             </MenuItem>
         </Menu>
         <Grid>
-            <TabControl>
+            <TabControl TabStripPlacement="Bottom">
                 <TabItem>
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Colors" Foreground="Blue" />
+                            <TextBlock Text="Colors" />
                         </StackPanel>
                     </TabItem.Header>
                     <ListView ItemsSource="{Binding Colors}">
@@ -33,7 +43,7 @@
                 <TabItem>
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Properties" Foreground="Red" />
+                            <TextBlock Text="Properties" />
                         </StackPanel>
                     </TabItem.Header>
                     <ListView ItemsSource="{Binding Properties}">

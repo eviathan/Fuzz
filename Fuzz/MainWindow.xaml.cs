@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using Fuzz.ViewModels;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -22,9 +23,12 @@ namespace Fuzz
     /// </summary>
     public partial class MainWindow : Window
     {
+        public MainWindowViewModel Model { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new MainWindowViewModel(Theme.Instance);
         }
 
         private void MenuItem_Open(object sender, RoutedEventArgs e)
