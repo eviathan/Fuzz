@@ -9,10 +9,7 @@
         Title="MainWindow"
         Height="498"
         Width="294"
-        MinHeight="498"
-        MaxHeight="498"
-        MinWidth="294"
-        MaxWidth="294">
+        ResizeMode="NoResize">
     <Window.Resources>
         <ResourceDictionary Source="Style.xaml" />
     </Window.Resources>
@@ -25,7 +22,7 @@
             </MenuItem>
         </Menu>
         <Grid>
-            <TabControl TabStripPlacement="Bottom">
+            <TabControl TabStripPlacement="Bottom" Margin="0" Padding="0">
                 <TabItem>
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">

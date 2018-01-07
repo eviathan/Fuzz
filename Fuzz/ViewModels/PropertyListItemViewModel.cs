@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Fuzz.ViewModels
 {
-    public class PropertyListItemViewModel : ViewModelBase
+    public class PropertyListItemViewModel
     {
         public PropertyItemType Type { get; set; } = PropertyItemType.FloatType;
 

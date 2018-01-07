@@ -37,8 +37,11 @@ namespace Fuzz
             {
                 Filter = "Ableton skin files (*.ask)|*.ask"
             };
-            
-            if (openFileDialog.ShowDialog() == true) Theme.Instance.Parse(File.ReadAllText(openFileDialog.FileName));
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                Model = new MainWindowViewModel(Theme.Instance.Parse(File.ReadAllText(openFileDialog.FileName)));
+            }
         }
 
         private void MenuItem_Save(object sender, RoutedEventArgs e)

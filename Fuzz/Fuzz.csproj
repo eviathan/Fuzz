@@ -57,6 +57,7 @@
     <Compile Include="Models\PropertyItem.cs" />
     <Compile Include="Theme.cs" />
     <Compile Include="Enums\PropertyItemType.cs" />
+    <Compile Include="ValueConverters\ColorToSolidColorBrushValueConverter.cs" />
     <Compile Include="ViewModels\ColorListItemViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\PropertyListItemViewModel.cs" />

@@ -1,6 +1,8 @@
 ﻿using Fuzz.Models;
+using Fuzz.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,7 +33,7 @@ namespace Fuzz
         private string creator = "Fuzz 1.0.0";
         private string revision = "b8761d5b3a670e00b16e716b603a7c9f50dcfcb0"; // NOTE: This needs to be changed
 
-        private static Color defaultColor = Color.FromArgb(255, 255, 255, 255);
+        private static Color defaultColor = Color.FromArgb(255, 23, 240, 56);
 
         public Dictionary<string, PropertyItem> Properties { get; set; } = new Dictionary<string, PropertyItem>
         {
@@ -206,7 +208,7 @@ namespace Fuzz
         };
 
 
-        internal void Parse(string dataString)
+        internal Theme Parse(string dataString)
         {
             var document = XDocument.Parse(dataString);
 
@@ -217,7 +219,7 @@ namespace Fuzz
             creator = abletonElement.Attribute("Creator").Value;
             revision = abletonElement.Attribute("Revision").Value;
 
-            Colors = abletonElement.Element("SkinManager")
+            Theme.instance.Colors = abletonElement.Element("SkinManager")
                 .Descendants()
                 .Where(x => !x.HasAttributes) // NOTE: This is not great but we get what we are given.
                 .Select(x => {
@@ -244,6 +246,8 @@ namespace Fuzz
             //        });
             //    })
             //    .ToDictionary(x => x.Item1, x => x.Item2);
+
+            return this;
         }
 
         // TODO: refactor this so its OO and uses a grown up serialiser/ parser

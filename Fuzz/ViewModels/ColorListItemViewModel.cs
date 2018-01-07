@@ -7,7 +7,7 @@ using System.Windows.Media;
 
 namespace Fuzz.ViewModels
 {
-    public class ColorListItemViewModel : ViewModelBase
+    public class ColorListItemViewModel
     {
         public string Name { get; set; }
         public Color Value { get; set; }
