@@ -15,11 +15,15 @@
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
     </Style>
-
+    
     <Style TargetType="TabControl">
         <Setter Property="Background" Value="DarkGray" />
     </Style>
 
+    <Style TargetType="TabPanel">
+        <Setter Property="Background" Value="DarkGray" />
+    </Style>
+    
     <Style TargetType="TabItem">
         <Setter Property="Padding" Value="30, 0" />
         <Setter Property="Height" Value="35" />

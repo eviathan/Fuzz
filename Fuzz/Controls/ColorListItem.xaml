@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Fuzz.Controls"
              xmlns:converters="clr-namespace:Fuzz.ValueConverters"
              mc:Ignorable="d" 
-             d:DesignHeight="60" d:DesignWidth="247"
+             d:DesignHeight="60" d:DesignWidth="246"
              Height="60" Width="246">
     <UserControl.Resources>
         <ResourceDictionary Source="../Style.xaml" />
