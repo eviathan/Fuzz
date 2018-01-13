@@ -44,20 +44,30 @@ namespace Fuzz
 
             if (openFileDialog.ShowDialog() == true)
             {
-                Model.WindowTitle = $"{WINDOW_TITLE} - {openFileDialog.SafeFileName}";
-                Model.Set(Theme.Parse(File.ReadAllText(openFileDialog.FileName)));
+                OpenFile(openFileDialog.FileName, openFileDialog.SafeFileName);
             }
+        }
+
+        private void OpenFile(string filePath, string fileName)
+        {
+            Model.WindowTitle = $"{WINDOW_TITLE} - {fileName}";
+            Model.Set(Theme.Parse(File.ReadAllText(filePath)));
         }
 
         private void MenuItem_Save(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
-
             var saveFileDialog = new Microsoft.Win32.SaveFileDialog
             {
                 Filter = "Ableton skin files (*.ask)|*.ask"
             };
-            //if(saveFileDialog.ShowDialog() == true) File.
+
+            if(saveFileDialog.ShowDialog() == true)
+            {
+                var filePath = saveFileDialog.FileName;
+                var themeString = Theme.Serialize(new Theme(Model));
+                File.WriteAllText(filePath, themeString);
+                OpenFile(saveFileDialog.FileName, saveFileDialog.SafeFileName);
+            }
         }
     }
 }

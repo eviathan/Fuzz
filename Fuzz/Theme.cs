@@ -20,6 +20,22 @@ namespace Fuzz
         private string revision = "b8761d5b3a670e00b16e716b603a7c9f50dcfcb0"; // NOTE: This needs to be changed
 
         private static Color defaultColor = Color.FromArgb(255, 255, 255, 255);
+        private MainWindowViewModel model;
+
+        public Theme() { }
+
+        public Theme(MainWindowViewModel model)
+        {
+            foreach (var color in model.Colors)
+            {
+                Colors[color.Name] = color.Value;
+            }
+
+            foreach (var property in model.Properties)
+            {
+                Properties[property.Name].Value = property.FloatValue;
+            }
+        }
 
         public Dictionary<string, PropertyItem> Properties { get; set; } = new Dictionary<string, PropertyItem>
         {
@@ -220,19 +236,20 @@ namespace Fuzz
                 })
                 .ToDictionary(x => x.Item1, x => x.Item2);
 
-            //Properties = abletonElement.Element("SkinManager")
-            //    .Descendants()
-            //    .Where(x => x.HasAttributes && !string.IsNullOrWhiteSpace(x.Attribute("Value")?.Value)) // NOTE: This is not great but we get what we are given.
-            //    .Select(x => {
-            //        var name = x.Name.LocalName;
-            //        var value = byte.Parse(x.Attribute("Value").Value);
+            theme.Properties = abletonElement.Element("SkinManager")
+                .Descendants()
+                .Where(x => x.HasAttributes && !string.IsNullOrWhiteSpace(x.Attribute("Value")?.Value) && !(new List<string> { "Alpha", "R", "G", "B" }.Contains(x.Name.LocalName))) // NOTE: This is not great but we get what we are given.
+                .Select(x =>
+                {
+                    var name = x.Name.LocalName;
+                    var value = float.Parse(x.Attribute("Value").Value);
 
-            //        return new Tuple<string, PropertyItem>(name, new PropertyItem
-            //        {
-            //            Value = value
-            //        });
-            //    })
-            //    .ToDictionary(x => x.Item1, x => x.Item2);
+                    return new Tuple<string, PropertyItem>(name, new PropertyItem
+                    {
+                        Value = value
+                    });
+                })
+                .ToDictionary(x => x.Item1, x => x.Item2);
 
             return theme;
         }
