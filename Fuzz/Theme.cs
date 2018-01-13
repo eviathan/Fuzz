@@ -13,27 +13,13 @@ namespace Fuzz
 {
     public sealed class Theme
     {
-        #region Singleton Code
-        private static readonly Theme instance = new Theme();
-        static Theme() { }
-        private Theme() { }
-
-        public static Theme Instance
-        {
-            get
-            {
-                return instance;
-            }
-        }
-        #endregion
-
         private int majorVersion = 5;
         private string minorVersion = "10.0_370";
         private int schemaChangeCount = 1;
         private string creator = "Fuzz 1.0.0";
         private string revision = "b8761d5b3a670e00b16e716b603a7c9f50dcfcb0"; // NOTE: This needs to be changed
 
-        private static Color defaultColor = Color.FromArgb(255, 23, 240, 56);
+        private static Color defaultColor = Color.FromArgb(255, 255, 255, 255);
 
         public Dictionary<string, PropertyItem> Properties { get; set; } = new Dictionary<string, PropertyItem>
         {
@@ -208,18 +194,19 @@ namespace Fuzz
         };
 
 
-        internal Theme Parse(string dataString)
+        public static Theme Parse(string dataString)
         {
+            var theme = new Theme();
             var document = XDocument.Parse(dataString);
 
             var abletonElement = document.Element("Ableton");
-            majorVersion = int.Parse(abletonElement.Attribute("MajorVersion").Value);
-            minorVersion = abletonElement.Attribute("MinorVersion").Value;
-            schemaChangeCount = int.Parse(abletonElement.Attribute("SchemaChangeCount").Value);
-            creator = abletonElement.Attribute("Creator").Value;
-            revision = abletonElement.Attribute("Revision").Value;
+            theme.majorVersion = int.Parse(abletonElement.Attribute("MajorVersion").Value);
+            theme.minorVersion = abletonElement.Attribute("MinorVersion").Value;
+            theme.schemaChangeCount = int.Parse(abletonElement.Attribute("SchemaChangeCount").Value);
+            theme.creator = abletonElement.Attribute("Creator").Value;
+            theme.revision = abletonElement.Attribute("Revision").Value;
 
-            Theme.instance.Colors = abletonElement.Element("SkinManager")
+            theme.Colors = abletonElement.Element("SkinManager")
                 .Descendants()
                 .Where(x => !x.HasAttributes) // NOTE: This is not great but we get what we are given.
                 .Select(x => {
@@ -247,16 +234,16 @@ namespace Fuzz
             //    })
             //    .ToDictionary(x => x.Item1, x => x.Item2);
 
-            return this;
+            return theme;
         }
 
         // TODO: refactor this so its OO and uses a grown up serialiser/ parser
-        internal string Serialize()
+        public static string Serialize(Theme theme)
         {
-            var colors = string.Join(Environment.NewLine, Colors.Select(x => $"<{x.Key}>\n<R Value=\"{x.Value.R}\" />\n<G Value=\"{x.Value.G}\" />\n<B Value=\"{x.Value.B}\" />\n<Alpha Value=\"{x.Value.A}\" />\n</{x.Key}>"));
-            var props = string.Join(Environment.NewLine, Properties.Select(x => $"<{x.Key} Value=\"{x.Value.GetValue()}\" />"));
+            var colors = string.Join(Environment.NewLine, theme.Colors.Select(x => $"<{x.Key}>\n<R Value=\"{x.Value.R}\" />\n<G Value=\"{x.Value.G}\" />\n<B Value=\"{x.Value.B}\" />\n<Alpha Value=\"{x.Value.A}\" />\n</{x.Key}>"));
+            var props = string.Join(Environment.NewLine, theme.Properties.Select(x => $"<{x.Key} Value=\"{x.Value.GetValue()}\" />"));
 
-            return $"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Ableton MajorVersion=\"{majorVersion}\" MinorVersion=\"{minorVersion}\" SchemaChangeCount=\"{schemaChangeCount}\" Creator=\"{creator}\" Revision=\"{revision}\">\n<SkinManager>\n{props}{colors}</SkinManager>\n</Ableton>";
+            return $"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Ableton MajorVersion=\"{theme.majorVersion}\" MinorVersion=\"{theme.minorVersion}\" SchemaChangeCount=\"{theme.schemaChangeCount}\" Creator=\"{theme.creator}\" Revision=\"{theme.revision}\">\n<SkinManager>\n{props}{colors}</SkinManager>\n</Ableton>";
         }
     }
 }

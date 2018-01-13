@@ -10,11 +10,11 @@ using System.Linq.Expressions;
 
 namespace Fuzz.ViewModels
 {
-    public abstract class ViewModelBase : INotifyPropertyChanged
+    public abstract class ViewModelBase<TDerivedViewModel> : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void OnPropertyChanged<T>(Expression<Func<ViewModelBase, T>> property)
+        protected void OnPropertyChanged<TProperty>(Expression<Func<TDerivedViewModel, TProperty>> property)
         {
             MemberExpression me = property.Body as MemberExpression;
             if (me == null || me.Expression != property.Parameters[0] || me.Member.MemberType != MemberTypes.Property)

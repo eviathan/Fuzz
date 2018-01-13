@@ -64,7 +64,7 @@
     <Style TargetType="MenuItem">
         <Setter Property="Background" Value="#2B2B2B" />
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Height" Value="25" />
+        <Setter Property="Height" Value="35" />
     </Style>
 
     <converters:ColorToSolidColorBrushValueConverter  x:Key="ColorToSolidColorBrushValueConverter"/>

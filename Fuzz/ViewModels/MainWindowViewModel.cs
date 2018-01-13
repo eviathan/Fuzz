@@ -7,32 +7,63 @@ using System.Threading.Tasks;
 
 namespace Fuzz.ViewModels
 {
-    public class MainWindowViewModel : ViewModelBase
+    public class MainWindowViewModel : ViewModelBase<MainWindowViewModel>
     {
-        public ObservableCollection<ColorListItemViewModel> Colors { get; set; }
+        private ObservableCollection<ColorListItemViewModel> _colors;
+        public ObservableCollection<ColorListItemViewModel> Colors
+        {
+            get => _colors;
+            set
+            {
+                _colors = value;
+                OnPropertyChanged(x => x.Colors);
+            }
+        }
         public ObservableCollection<PropertyListItemViewModel> Properties { get; set; } = new ObservableCollection<PropertyListItemViewModel>();
 
         public MainWindowViewModel(Theme theme)
         {
             Colors = new ObservableCollection<ColorListItemViewModel>();
+            Set(theme);            
+        }
 
+        public void Set(Theme theme)
+        {
             foreach (var color in theme.Colors)
             {
-                Colors.Add(new ColorListItemViewModel
+                var c = Colors.FirstOrDefault(x => x.Name == color.Key);
+
+                if (c != null)
+                    c.Value = color.Value;
+                else
                 {
-                    Name = color.Key,
-                    Value = color.Value
-                });
+                    Colors.Add(new ColorListItemViewModel
+                    {
+                        Name = color.Key,
+                        Value = color.Value
+                    });
+                }                
             }
 
-            foreach(var property in theme.Properties)
+            Colors.OrderBy(x => x.Name);
+
+            foreach (var property in theme.Properties)
             {
-                Properties.Add(new PropertyListItemViewModel
+                var p = Properties.FirstOrDefault(x => x.Name == property.Key);
+
+                if (p != null)
+                    p.FloatValue = property.Value.Value;
+                else
                 {
-                    Name = property.Key,
-                    FloatValue = property.Value.Value
-                });
+                    Properties.Add(new PropertyListItemViewModel
+                    {
+                        Name = property.Key,
+                        FloatValue = property.Value.Value
+                    });
+                }
             }
         }
+
+
     }
 }

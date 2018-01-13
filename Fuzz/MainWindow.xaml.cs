@@ -28,7 +28,8 @@ namespace Fuzz
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainWindowViewModel(Theme.Instance);
+            Model = new MainWindowViewModel(new Theme());
+            DataContext = Model;
         }
 
         private void MenuItem_Open(object sender, RoutedEventArgs e)
@@ -40,12 +41,14 @@ namespace Fuzz
 
             if (openFileDialog.ShowDialog() == true)
             {
-                Model = new MainWindowViewModel(Theme.Instance.Parse(File.ReadAllText(openFileDialog.FileName)));
+                Model.Set(Theme.Parse(File.ReadAllText(openFileDialog.FileName)));
             }
         }
 
         private void MenuItem_Save(object sender, RoutedEventArgs e)
         {
+            throw new NotImplementedException();
+
             SaveFileDialog saveFileDialog = new SaveFileDialog
             {
                 Filter = "Ableton skin files (*.ask)|*.ask"
