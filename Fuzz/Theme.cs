@@ -33,7 +33,8 @@ namespace Fuzz
 
             foreach (var property in model.Properties)
             {
-                Properties[property.Name].Value = property.FloatValue;
+                Properties[property.Name].Name = property.Name;
+                Properties[property.Name].Value = property.Value;
             }
         }
 
@@ -41,8 +42,8 @@ namespace Fuzz
         {
             {  "MinVelocityNoteBlendFactor", new PropertyItem() },
             { "StripedBackgroundShadeFactor", new PropertyItem() },
-            { "AutomationLaneHeaderAlpha", new PropertyItem { MaxValue = 255, Type = Enums.PropertyItemType.IntType } },
-            { "AutomationLaneClipBodyAlpha", new PropertyItem { MaxValue = 255, Type = Enums.PropertyItemType.IntType } },
+            { "AutomationLaneHeaderAlpha", new PropertyItem() },
+            { "AutomationLaneClipBodyAlpha", new PropertyItem() },
             { "DefaultBlendFactor", new PropertyItem() },
             { "IconBlendFactor", new PropertyItem() },
             { "ClipBlendFactor", new PropertyItem() },
@@ -246,6 +247,7 @@ namespace Fuzz
 
                     return new Tuple<string, PropertyItem>(name, new PropertyItem
                     {
+                        Name = name,
                         Value = value
                     });
                 })

@@ -8,6 +8,6 @@ namespace Fuzz.Enums
 {
     public enum PropertyItemType
     {
-        IntType, FloatType
+        FloatType, IntType
     }
 }

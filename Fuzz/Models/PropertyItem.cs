@@ -13,13 +13,33 @@ namespace Fuzz.Models
 
         public float Value { get; set; }
 
-        public float MaxValue { get; set; }
+        public float NormalisedValue
+        {
+            get
+            {
+                return Value / MaxValue;
+            }
+        }
 
-        public PropertyItemType Type { get; set; }
+        public float MaxValue
+        {
+            get
+            {
+                return Type == PropertyItemType.FloatType ? 1.0f : 255.0f;
+            }
+        }
+
+        public PropertyItemType Type
+        {
+            get
+            {
+                return new List<string> { "AutomationLaneHeaderAlpha", "AutomationLaneClipBodyAlpha" }.Contains(Name) ? PropertyItemType.IntType : PropertyItemType.FloatType;
+            }
+        }
 
         internal string GetValue()
         {
-            return (Type == PropertyItemType.FloatType ? Value : (int) Value).ToString();
+            return (Type == PropertyItemType.FloatType ? Value : (byte)(Value * byte.MaxValue)).ToString();
         }
     }
 }

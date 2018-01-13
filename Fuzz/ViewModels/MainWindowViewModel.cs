@@ -108,13 +108,13 @@ namespace Fuzz.ViewModels
                 var p = Properties.FirstOrDefault(x => x.Name == property.Key);
 
                 if (p != null)
-                    p.FloatValue = property.Value.Value;
+                    p.Value = property.Value.NormalisedValue;
                 else
                 {
                     Properties.Add(new PropertyListItemViewModel
                     {
                         Name = property.Key,
-                        FloatValue = property.Value.Value
+                        Value = property.Value.NormalisedValue
                     });
                 }
             }

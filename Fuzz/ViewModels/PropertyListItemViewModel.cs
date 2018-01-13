@@ -13,16 +13,6 @@ namespace Fuzz.ViewModels
 
         public string Name { get; set; }
 
-        public string Value
-        {
-            get
-            {
-                return Type == PropertyItemType.FloatType ? FloatValue.ToString() : IntValue.ToString();
-            }
-        }
-
-        public int IntValue { get; set; }
-
-        public float FloatValue { get; set; }
+        public float Value { get; set; }
     }
 }
