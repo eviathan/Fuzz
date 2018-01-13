@@ -7,12 +7,39 @@ using System.Threading.Tasks;
 
 namespace Fuzz.ViewModels
 {
-    public class PropertyListItemViewModel
+    public class PropertyListItemViewModel : ViewModelBase<PropertyListItemViewModel>
     {
-        public PropertyItemType Type { get; set; } = PropertyItemType.FloatType;
+        private PropertyItemType _type;
+        public PropertyItemType Type
+        {
+            get => _type;
+            set
+            {
+                _type = value;
+                OnPropertyChanged(x => x.Type);
+            }
+        }
 
-        public string Name { get; set; }
+        private string _name;
+        public string Name
+        {
+            get => _name;
+            set
+            {
+                _name = value;
+                OnPropertyChanged(x => x.Name);
+            }
+        }
 
-        public float Value { get; set; }
+        private float _value;
+        public float Value
+        {
+            get => _value;
+            set
+            {
+                _value = value;
+                OnPropertyChanged(x => x.Value);
+            }
+        }
     }
 }
