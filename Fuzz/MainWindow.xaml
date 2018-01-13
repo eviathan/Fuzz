@@ -6,33 +6,58 @@
         xmlns:local="clr-namespace:Fuzz"
         xmlns:controls="clr-namespace:Fuzz.Controls"
         mc:Ignorable="d"
-        Title="MainWindow"
-        Height="498"
-        Width="294"
+        Title="{Binding WindowTitle, FallbackValue=Fuzz}"
+        WindowStyle="SingleBorderWindow"
+        Height="500"
+        Width="320"
         ResizeMode="NoResize">
     <Window.Resources>
         <ResourceDictionary Source="Style.xaml" />
     </Window.Resources>
     
     <DockPanel>
+        <!--<Grid Height="30" DockPanel.Dock="Top" HorizontalAlignment="Left">
+            <StackPanel Orientation="Horizontal"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center">
+
+                <Button x:Name="MinimizeButton"
+                KeyboardNavigation.IsTabStop="False"
+                Click="MinimizeWindow" />
+
+                <Button x:Name="MaximizeButton"
+                KeyboardNavigation.IsTabStop="False"
+                Click="MaximizeClick"/>
+
+                <Button x:Name="CloseButton"
+                KeyboardNavigation.IsTabStop="False"
+                Command="{Binding ApplicationCommands.Close}"/>
+
+            </StackPanel>
+        </Grid>-->
         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="_File" BorderBrush="Transparent" BorderThickness="0">
-                <MenuItem Header="_Open" Click="MenuItem_Open" BorderBrush="Transparent" BorderThickness="0"/>
-                <MenuItem Header="_Save" Click="MenuItem_Save" BorderBrush="Transparent" BorderThickness="0"/>
+            <MenuItem Header="_File" BorderBrush="Transparent" BorderThickness="0" Padding="20,0">
+                <MenuItem Header="_Open" Icon="" Click="MenuItem_Open" BorderBrush="Transparent" BorderThickness="0"/>
+                <MenuItem Header="_Save" Icon="" Click="MenuItem_Save" BorderBrush="Transparent" BorderThickness="0"/>
             </MenuItem>
         </Menu>
         <Grid>
-            <TabControl TabStripPlacement="Bottom" Margin="0" Padding="0">
+            <!--<Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <TextBox Text="asdasd" Grid.Row="0" VerticalAlignment="Center" Padding="8,0" />-->
+            <TabControl Grid.Row="1" TabStripPlacement="Bottom" Margin="0" Padding="0">
                 <TabItem>
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Colors" />
                         </StackPanel>
                     </TabItem.Header>
-                    <ListView ItemsSource="{Binding Colors}">
+                    <ListView ItemsSource="{Binding ColorSourceCollection}" SelectedItem="{Binding SelectedColor, Mode=TwoWay}">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <controls:ColorListItem />
+                                <controls:ColorListItem Margin="0,-5,0,-5" />
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
@@ -43,7 +68,7 @@
                             <TextBlock Text="Properties" />
                         </StackPanel>
                     </TabItem.Header>
-                    <ListView ItemsSource="{Binding Properties}">
+                    <ListView ItemsSource="{Binding Properties}" SelectedIndex="{Binding SelectedProperty}">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <controls:PropertyListItem />

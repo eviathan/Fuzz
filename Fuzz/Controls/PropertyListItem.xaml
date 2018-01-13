@@ -5,12 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Fuzz.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="60" d:DesignWidth="246"
-             Height="60" Width="246">
-    <StackPanel Orientation="Vertical">
-        <TextBlock Text="Name" HorizontalAlignment="Center" Padding="0,6" Foreground="White" />
-        <StackPanel Margin="12,0">
-            <Slider Orientation="Horizontal" HorizontalAlignment="Stretch"/>
-        </StackPanel>        
-    </StackPanel>
+             d:DesignHeight="60" d:DesignWidth="275"
+             Margin="0,5,0,0"
+             Height="60" Width="275">
+    <Border BorderThickness="1" BorderBrush="DarkGray" CornerRadius="2" Margin="5,0">
+        <StackPanel Orientation="Vertical">
+            <TextBlock Text="{Binding Name, FallbackValue=Name}" HorizontalAlignment="Center" Padding="0,6" Foreground="White" />
+            <StackPanel Margin="12,0">
+                <Slider Value="{Binding FloatValue}" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
+            </StackPanel>        
+        </StackPanel>
+    </Border>
 </UserControl>

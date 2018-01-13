@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -23,6 +24,8 @@ namespace Fuzz
     /// </summary>
     public partial class MainWindow : Window
     {
+        private const string WINDOW_TITLE = "Fuzz";
+
         public MainWindowViewModel Model { get; set; }
 
         public MainWindow()
@@ -34,13 +37,14 @@ namespace Fuzz
 
         private void MenuItem_Open(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog
+            var openFileDialog = new Microsoft.Win32.OpenFileDialog
             {
                 Filter = "Ableton skin files (*.ask)|*.ask"
             };
 
             if (openFileDialog.ShowDialog() == true)
             {
+                Model.WindowTitle = $"{WINDOW_TITLE} - {openFileDialog.SafeFileName}";
                 Model.Set(Theme.Parse(File.ReadAllText(openFileDialog.FileName)));
             }
         }
@@ -49,7 +53,7 @@ namespace Fuzz
         {
             throw new NotImplementedException();
 
-            SaveFileDialog saveFileDialog = new SaveFileDialog
+            var saveFileDialog = new Microsoft.Win32.SaveFileDialog
             {
                 Filter = "Ableton skin files (*.ask)|*.ask"
             };

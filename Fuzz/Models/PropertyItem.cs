@@ -9,6 +9,8 @@ namespace Fuzz.Models
 {
     public class PropertyItem
     {
+        public string Name { get; set; }
+
         public float Value { get; set; }
 
         public float MaxValue { get; set; }
