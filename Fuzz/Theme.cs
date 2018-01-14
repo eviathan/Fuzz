@@ -262,7 +262,7 @@ namespace Fuzz
             var colors = string.Join(Environment.NewLine, theme.Colors.Select(x => $"<{x.Key}>\n<R Value=\"{x.Value.R}\" />\n<G Value=\"{x.Value.G}\" />\n<B Value=\"{x.Value.B}\" />\n<Alpha Value=\"{x.Value.A}\" />\n</{x.Key}>"));
             var props = string.Join(Environment.NewLine, theme.Properties.Select(x => $"<{x.Key} Value=\"{x.Value.GetValue()}\" />"));
 
-            return $"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Ableton MajorVersion=\"{theme.majorVersion}\" MinorVersion=\"{theme.minorVersion}\" SchemaChangeCount=\"{theme.schemaChangeCount}\" Creator=\"{theme.creator}\" Revision=\"{theme.revision}\">\n<SkinManager>\n{props}{colors}</SkinManager>\n</Ableton>";
+            return $"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Ableton MajorVersion=\"{theme.majorVersion}\" MinorVersion=\"{theme.minorVersion}\" SchemaChangeCount=\"{theme.schemaChangeCount}\" Creator=\"{theme.creator}\" Revision=\"{theme.revision}\">\n<SkinManager>\n{props}\n{colors}</SkinManager>\n</Ableton>";
         }
     }
 }
