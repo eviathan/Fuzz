@@ -15,6 +15,8 @@ namespace Fuzz.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase<MainWindowViewModel>
     {
+        public string currentFilePath { get; set; } = string.Empty;
+
         private CollectionViewSource colorCollection;
         private ObservableCollection<ColorListItemViewModel> _colors;
         public ObservableCollection<ColorListItemViewModel> Colors
@@ -68,8 +70,22 @@ namespace Fuzz.ViewModels
             }
         }
 
+
+        private SettingsViewModel _settings;
+        public SettingsViewModel Settings
+        {
+            get => _settings;
+            set
+            {
+                _settings = value;
+                OnPropertyChanged(x => x.Settings);
+            }
+        }
+
         public MainWindowViewModel(Theme theme)
         {
+            Settings = new SettingsViewModel(theme);
+
             Colors = new ObservableCollection<ColorListItemViewModel>();
             Properties = new ObservableCollection<PropertyListItemViewModel>();
             Set(theme);
@@ -87,6 +103,12 @@ namespace Fuzz.ViewModels
 
         public void Set(Theme theme)
         {
+            Settings.MajorVersion = theme.MajorVersion;
+            Settings.MinorVersion = theme.minorVersion;
+            Settings.SchemaChangeCount = theme.SchemaChangeCount;
+            Settings.Revision = theme.Revision;
+            Settings.Creator = theme.Creator;
+
             foreach (var color in theme.Colors.OrderBy(x => x.Key))
             {
                 var c = Colors.FirstOrDefault(x => x.Name == color.Key);

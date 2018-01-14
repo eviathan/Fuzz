@@ -6,6 +6,7 @@
     <SolidColorBrush x:Key="DarkGreyBrush" Color="#2B2B2B" />
 
     <Style TargetType="Window">
+        <Setter Property="Background" Value="#2B2B2B" />
         <Setter Property="Foreground" Value="Red" />
         <Setter Property="BorderThickness" Value="0" />
     </Style>

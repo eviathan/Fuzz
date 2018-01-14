@@ -13,11 +13,11 @@ namespace Fuzz
 {
     public sealed class Theme
     {
-        private int majorVersion = 5;
-        private string minorVersion = "10.0_370";
-        private int schemaChangeCount = 1;
-        private string creator = "Fuzz 1.0.0";
-        private string revision = "b8761d5b3a670e00b16e716b603a7c9f50dcfcb0"; // NOTE: This needs to be changed
+        public int MajorVersion = 5;
+        public string minorVersion = "10.0_370";
+        public int SchemaChangeCount = 1;
+        public string Creator = "Fuzz 1.0.0";
+        public string Revision = "b8761d5b3a670e00b16e716b603a7c9f50dcfcb0"; // NOTE: This needs to be changed
 
         private static Color defaultColor = Color.FromArgb(255, 255, 255, 255);
         private MainWindowViewModel model;
@@ -26,6 +26,12 @@ namespace Fuzz
 
         public Theme(MainWindowViewModel model)
         {
+            MajorVersion = model.Settings.MajorVersion;
+            minorVersion = model.Settings.MinorVersion;
+            SchemaChangeCount = model.Settings.SchemaChangeCount;
+            Creator = model.Settings.Creator;
+            Revision = model.Settings.Revision;
+
             foreach (var color in model.Colors)
             {
                 Colors[color.Name] = color.Value;
@@ -217,11 +223,11 @@ namespace Fuzz
             var document = XDocument.Parse(dataString);
 
             var abletonElement = document.Element("Ableton");
-            theme.majorVersion = int.Parse(abletonElement.Attribute("MajorVersion").Value);
+            theme.MajorVersion = int.Parse(abletonElement.Attribute("MajorVersion").Value);
             theme.minorVersion = abletonElement.Attribute("MinorVersion").Value;
-            theme.schemaChangeCount = int.Parse(abletonElement.Attribute("SchemaChangeCount").Value);
-            theme.creator = abletonElement.Attribute("Creator").Value;
-            theme.revision = abletonElement.Attribute("Revision").Value;
+            theme.SchemaChangeCount = int.Parse(abletonElement.Attribute("SchemaChangeCount").Value);
+            theme.Creator = abletonElement.Attribute("Creator").Value;
+            theme.Revision = abletonElement.Attribute("Revision").Value;
 
             theme.Colors = abletonElement.Element("SkinManager")
                 .Descendants()
@@ -262,7 +268,7 @@ namespace Fuzz
             var colors = string.Join(Environment.NewLine, theme.Colors.Select(x => $"<{x.Key}>{Environment.NewLine}<R Value=\"{x.Value.R}\" />{Environment.NewLine}<G Value=\"{x.Value.G}\" />{Environment.NewLine}<B Value=\"{x.Value.B}\" />{Environment.NewLine}<Alpha Value=\"{x.Value.A}\" />{Environment.NewLine}</{x.Key}>"));
             var props = string.Join(Environment.NewLine, theme.Properties.Select(x => $"<{x.Key} Value=\"{x.Value.GetValue()}\" />"));
 
-            return $"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Ableton MajorVersion=\"{theme.majorVersion}\" MinorVersion=\"{theme.minorVersion}\" SchemaChangeCount=\"{theme.schemaChangeCount}\" Creator=\"{theme.creator}\" Revision=\"{theme.revision}\">{Environment.NewLine}<SkinManager>{Environment.NewLine}{props}{Environment.NewLine}{colors}{Environment.NewLine}</SkinManager>{Environment.NewLine}</Ableton>";
+            return $"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Ableton MajorVersion=\"{theme.MajorVersion}\" MinorVersion=\"{theme.minorVersion}\" SchemaChangeCount=\"{theme.SchemaChangeCount}\" Creator=\"{theme.Creator}\" Revision=\"{theme.Revision}\">{Environment.NewLine}<SkinManager>{Environment.NewLine}{props}{Environment.NewLine}{colors}{Environment.NewLine}</SkinManager>{Environment.NewLine}</Ableton>";
         }
     }
 }

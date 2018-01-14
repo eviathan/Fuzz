@@ -23,12 +23,14 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File" BorderBrush="Transparent" BorderThickness="0" Padding="20,0">
+                <MenuItem Header="_New" Icon="" Click="MenuItem_New" BorderBrush="Transparent" BorderThickness="0"/>
                 <MenuItem Header="_Open" Icon="" Click="MenuItem_Open" BorderBrush="Transparent" BorderThickness="0"/>
                 <MenuItem Header="_Save" Icon="" Click="MenuItem_Save" BorderBrush="Transparent" BorderThickness="0"/>
+                <MenuItem Header="_SaveAs" Icon="" Click="MenuItem_SaveAs" BorderBrush="Transparent" BorderThickness="0"/>
             </MenuItem>
         </Menu>
         <Grid>
-            <TabControl Grid.Row="1" TabStripPlacement="Bottom" Margin="0" Padding="0">
+            <TabControl Grid.Row="1" TabStripPlacement="Bottom" Margin="0" Padding="0" Background="#2B2B2B">
                 <TabItem Header="Color">
                     <ListView ItemsSource="{Binding ColorSourceCollection}" SelectedItem="{Binding SelectedColor, Mode=TwoWay}">
                         <ListView.ItemTemplate>
@@ -46,6 +48,9 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
+                </TabItem>
+                <TabItem Header="Settings">
+                    <controls:SettingsControl DataContext="{Binding Settings}" />
                 </TabItem>
             </TabControl>
         </Grid>
