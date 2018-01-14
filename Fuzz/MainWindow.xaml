@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="{Binding WindowTitle, FallbackValue=Fuzz}"
         WindowStyle="SingleBorderWindow"
-        Height="500"
+        Height="660"
         MinHeight="450"
         MaxHeight="1200"
         MinWidth="345"

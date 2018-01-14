@@ -4,13 +4,14 @@
                     xmlns:converters="clr-namespace:Fuzz.ValueConverters">
 
     <SolidColorBrush x:Key="DarkGreyBrush" Color="#2B2B2B" />
+    <BitmapImage x:Key="LogoSmall" UriSource="/logoSmall.png" RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased" />
 
+    
     <Style TargetType="Window">
         <Setter Property="Background" Value="#2B2B2B" />
         <Setter Property="Foreground" Value="Red" />
         <Setter Property="BorderThickness" Value="0" />
     </Style>
-
     <Style TargetType="Button">
         <Setter Property="OverridesDefaultStyle" Value="True"/>
         <Setter Property="Margin" Value="5"/>
@@ -244,5 +245,20 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+    <Style TargetType="{x:Type Hyperlink}">
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="TextDecorations" Value="Underline"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="LightGray"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="True">
+                <Setter Property="Cursor" Value="Hand"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 </ResourceDictionary>
