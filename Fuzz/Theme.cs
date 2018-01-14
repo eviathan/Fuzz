@@ -259,10 +259,10 @@ namespace Fuzz
         // TODO: refactor this so its OO and uses a grown up serialiser/ parser
         public static string Serialize(Theme theme)
         {
-            var colors = string.Join(Environment.NewLine, theme.Colors.Select(x => $"<{x.Key}>\n<R Value=\"{x.Value.R}\" />\n<G Value=\"{x.Value.G}\" />\n<B Value=\"{x.Value.B}\" />\n<Alpha Value=\"{x.Value.A}\" />\n</{x.Key}>"));
+            var colors = string.Join(Environment.NewLine, theme.Colors.Select(x => $"<{x.Key}>{Environment.NewLine}<R Value=\"{x.Value.R}\" />{Environment.NewLine}<G Value=\"{x.Value.G}\" />{Environment.NewLine}<B Value=\"{x.Value.B}\" />{Environment.NewLine}<Alpha Value=\"{x.Value.A}\" />{Environment.NewLine}</{x.Key}>"));
             var props = string.Join(Environment.NewLine, theme.Properties.Select(x => $"<{x.Key} Value=\"{x.Value.GetValue()}\" />"));
 
-            return $"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Ableton MajorVersion=\"{theme.majorVersion}\" MinorVersion=\"{theme.minorVersion}\" SchemaChangeCount=\"{theme.schemaChangeCount}\" Creator=\"{theme.creator}\" Revision=\"{theme.revision}\">\n<SkinManager>\n{props}\n{colors}</SkinManager>\n</Ableton>";
+            return $"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Ableton MajorVersion=\"{theme.majorVersion}\" MinorVersion=\"{theme.minorVersion}\" SchemaChangeCount=\"{theme.schemaChangeCount}\" Creator=\"{theme.creator}\" Revision=\"{theme.revision}\">{Environment.NewLine}<SkinManager>{Environment.NewLine}{props}{Environment.NewLine}{colors}{Environment.NewLine}</SkinManager>{Environment.NewLine}</Ableton>";
         }
     }
 }
