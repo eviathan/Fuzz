@@ -8,10 +8,14 @@
         mc:Ignorable="d"
         Title="{Binding WindowTitle, FallbackValue=Fuzz}"
         WindowStyle="SingleBorderWindow"
-        Height="700"
+        Height="500"
+        MinHeight="450"
+        MaxHeight="800"
+        MinWidth="345"
+        MaxWidth="345"
         Width="345"
         Icon="icon.ico"
-        ResizeMode="NoResize">
+        ResizeMode="CanResize">
     <Window.Resources>
         <ResourceDictionary Source="Style.xaml" />
     </Window.Resources>
