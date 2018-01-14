@@ -39,7 +39,7 @@ namespace Fuzz.Models
 
         internal string GetValue()
         {
-            return Type == PropertyItemType.FloatType ? Value.ToString("0." + new string('#', 339)) : ((byte)(Value * byte.MaxValue)).ToString();
+            return Type == PropertyItemType.FloatType ? Value.ToString("F9") : ((byte)(Value * byte.MaxValue)).ToString();
         }
     }
 }
