@@ -47,6 +47,9 @@
                         </ListView.ItemTemplate>
                     </ListView>
                 </TabItem>
+                <TabItem Header="Settings">
+                    <controls:SettingsControl DataContext="{Binding Settings}" />
+                </TabItem>
             </TabControl>
         </Grid>
     </DockPanel>

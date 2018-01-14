@@ -68,6 +68,18 @@ namespace Fuzz.ViewModels
             }
         }
 
+
+        private SettingsViewModel _settings;
+        public SettingsViewModel Settings
+        {
+            get => _settings;
+            set
+            {
+                _settings = value;
+                OnPropertyChanged(x => x.Settings);
+            }
+        }
+
         public MainWindowViewModel(Theme theme)
         {
             Colors = new ObservableCollection<ColorListItemViewModel>();
