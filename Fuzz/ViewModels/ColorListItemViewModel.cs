@@ -45,11 +45,13 @@ namespace Fuzz.ViewModels
             {
                 dialog.Color = System.Drawing.Color.FromArgb(color.A, color.R, color.G, color.B);
                 dialog.ShowAlphaChannel = true;
-
+                dialog.StartPosition = FormStartPosition.CenterScreen;
                 dialog.PreviewColorChanged += Dialog_PreviewColorChanged;
 
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
+                    
+
                     return new Color()
                     {
                         A = dialog.Color.A,
