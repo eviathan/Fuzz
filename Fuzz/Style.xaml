@@ -101,7 +101,7 @@
     </Style>
 
     <converters:ColorToSolidColorBrushValueConverter  x:Key="ColorToSolidColorBrushValueConverter"/>
-
+    <converters:PascalCaseToSplitStringConverter x:Key="PascalCaseConverter" />
 
     <!--Scrollbar Thumbs-->
     <Style x:Key="ScrollThumbs" TargetType="{x:Type Thumb}">

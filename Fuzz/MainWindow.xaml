@@ -8,8 +8,8 @@
         mc:Ignorable="d"
         Title="{Binding WindowTitle, FallbackValue=Fuzz}"
         WindowStyle="SingleBorderWindow"
-        Height="500"
-        Width="320"
+        Height="700"
+        Width="345"
         Icon="icon.ico"
         ResizeMode="NoResize">
     <Window.Resources>

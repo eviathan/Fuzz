@@ -4,13 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Fuzz.Controls"
+             xmlns:converters="clr-namespace:Fuzz.ValueConverters"
              mc:Ignorable="d" 
-             d:DesignHeight="60" d:DesignWidth="275"
+             d:DesignHeight="60" d:DesignWidth="300"
              Margin="0,5,0,0"
-             Height="70" Width="275">
+             Height="70" Width="300">
+    <UserControl.Resources>
+        <ResourceDictionary Source="../Style.xaml" />
+    </UserControl.Resources>
     <Border BorderThickness="1" BorderBrush="DarkGray" CornerRadius="0" Margin="5,0">
         <StackPanel Orientation="Vertical">
-            <TextBlock Text="{Binding Name, FallbackValue=Name}" HorizontalAlignment="Center" Padding="0,10" Foreground="White" />
+            <TextBlock Text="{Binding Name, Converter={StaticResource PascalCaseConverter}, FallbackValue=Name}" HorizontalAlignment="Center" Padding="0,10" Foreground="White" />
             <StackPanel Margin="12,0">
                 <Slider Value="{Binding Value}" Minimum="0.0" Maximum="1.0" Orientation="Horizontal" HorizontalAlignment="Stretch"/>
             </StackPanel>        

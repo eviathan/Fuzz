@@ -8,19 +8,19 @@
              mc:Ignorable="d" 
              Margin="0"
              Padding="0"
-             d:DesignHeight="60" d:DesignWidth="298"
-             Height="60" Width="275">
+             d:DesignHeight="60" d:DesignWidth="300"
+             Height="60" Width="300">
     <UserControl.Resources>
         <ResourceDictionary Source="../Style.xaml" />
     </UserControl.Resources>    
     <Grid>
         <Button Command="{Binding ColorSelected}" BorderBrush="Transparent" Background="Transparent">
-            <Grid Width="275" Height="60" VerticalAlignment="Center">
+            <Grid Width="300" Height="60" VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3*" />
                     <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="{Binding Name, FallbackValue=Key}" FontSize="12" Padding="8,0,0,0" VerticalAlignment="Center" Foreground="White" TextAlignment="Left"/>
+                <TextBlock Grid.Column="0" Text="{Binding Name, Converter={StaticResource PascalCaseConverter}, FallbackValue=Key}" FontSize="12" Padding="8,0,0,0" VerticalAlignment="Center" Foreground="White" TextAlignment="Left"/>
                 <Grid Grid.Column="1">                    
                     <Rectangle Fill="{Binding Value, FallbackValue=Gray, Converter={StaticResource ColorToSolidColorBrushValueConverter}}" />
                     <Rectangle Fill="DarkGray" Width="1" HorizontalAlignment="Left" />
