@@ -82,6 +82,8 @@ namespace Fuzz.ViewModels
 
         public MainWindowViewModel(Theme theme)
         {
+            Settings = new SettingsViewModel(theme);
+
             Colors = new ObservableCollection<ColorListItemViewModel>();
             Properties = new ObservableCollection<PropertyListItemViewModel>();
             Set(theme);

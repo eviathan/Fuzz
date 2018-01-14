@@ -7,15 +7,14 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <StackPanel>
-        <Border>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*" />
-                    <ColumnDefinition Width="3*" />
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Creator" Foreground="White" Grid.Column="0" />
-                <TextBox Grid.Column="1" />
-            </Grid>
-        </Border>
+        
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="3*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Creator" Foreground="White" Grid.Column="0" />
+            <TextBox Grid.Column="1" />
+        </Grid>
     </StackPanel>
 </UserControl>
