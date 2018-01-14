@@ -48,20 +48,38 @@ namespace Fuzz
             }
         }
 
+        private void MenuItem_New(object sender, RoutedEventArgs e)
+        {
+            Model.currentFilePath = null;                
+            Model.Set(new Theme());
+        }
+
         private void OpenFile(string filePath, string fileName)
         {
+            Model.currentFilePath = filePath;
             Model.WindowTitle = $"{WINDOW_TITLE} - {fileName}";
             Model.Set(Theme.Parse(File.ReadAllText(filePath)));
         }
 
         private void MenuItem_Save(object sender, RoutedEventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(Model.currentFilePath))
+            {
+                MenuItem_SaveAs(sender, e);
+                return;
+            }
+
+            var themeString = Theme.Serialize(new Theme(Model));
+            File.WriteAllText(Model.currentFilePath, themeString);
+        }
+        private void MenuItem_SaveAs(object sender, RoutedEventArgs e)
+        {
             var saveFileDialog = new Microsoft.Win32.SaveFileDialog
             {
                 Filter = "Ableton skin files (*.ask)|*.ask"
             };
 
-            if(saveFileDialog.ShowDialog() == true)
+            if (saveFileDialog.ShowDialog() == true)
             {
                 var filePath = saveFileDialog.FileName;
                 var themeString = Theme.Serialize(new Theme(Model));

@@ -26,6 +26,12 @@ namespace Fuzz
 
         public Theme(MainWindowViewModel model)
         {
+            MajorVersion = model.Settings.MajorVersion;
+            minorVersion = model.Settings.MinorVersion;
+            SchemaChangeCount = model.Settings.SchemaChangeCount;
+            Creator = model.Settings.Creator;
+            Revision = model.Settings.Revision;
+
             foreach (var color in model.Colors)
             {
                 Colors[color.Name] = color.Value;
