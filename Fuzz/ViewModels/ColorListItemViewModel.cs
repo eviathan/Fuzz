@@ -39,18 +39,32 @@ namespace Fuzz.ViewModels
             Value = GetColor(Value);
         });
 
+        private static int lastTop;
+        private static int lastLeft;
+        private static bool notFirstDialog;
         private Color GetColor(Color color = default(Color))
         {
             using (ColorPickerDialog dialog = new ColorPickerDialog())
             {
                 dialog.Color = System.Drawing.Color.FromArgb(color.A, color.R, color.G, color.B);
                 dialog.ShowAlphaChannel = true;
-                dialog.StartPosition = FormStartPosition.CenterScreen;
+
+                if (notFirstDialog)
+                {
+                    dialog.StartPosition = FormStartPosition.Manual;
+                }                    
+                
+                dialog.Top = lastTop;
+                dialog.Left = lastLeft;
+
+                notFirstDialog = true;
+
                 dialog.PreviewColorChanged += Dialog_PreviewColorChanged;
 
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    
+                    lastTop = dialog.Top;
+                    lastLeft = dialog.Left;
 
                     return new Color()
                     {
