@@ -10,7 +10,7 @@
         WindowStyle="SingleBorderWindow"
         Height="500"
         MinHeight="450"
-        MaxHeight="800"
+        MaxHeight="1200"
         MinWidth="345"
         MaxWidth="345"
         Width="345"
