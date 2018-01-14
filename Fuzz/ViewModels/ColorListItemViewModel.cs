@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cyotek.Windows.Forms;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -40,16 +41,32 @@ namespace Fuzz.ViewModels
 
         private Color GetColor(Color color = default(Color))
         {
-            var colorDialog = new ColorDialog()
+            using (ColorPickerDialog dialog = new ColorPickerDialog())
             {
-                Color = System.Drawing.Color.FromArgb(color.A, color.R, color.G, color.B),
-                FullOpen = true,
-                AllowFullOpen = true
-            };
+                dialog.Color = System.Drawing.Color.FromArgb(color.A, color.R, color.G, color.B);
+                dialog.ShowAlphaChannel = true;
 
-            colorDialog.ShowDialog();
+                dialog.PreviewColorChanged += Dialog_PreviewColorChanged;
 
-            return new Color()
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    return new Color()
+                    {
+                        A = dialog.Color.A,
+                        B = dialog.Color.B,
+                        G = dialog.Color.G,
+                        R = dialog.Color.R
+                    };
+                }
+            }
+
+            return color;
+        }
+
+        private void Dialog_PreviewColorChanged(object sender, EventArgs e)
+        {
+            var colorDialog = sender as ColorPickerDialog;
+            Value = new Color()
             {
                 A = colorDialog.Color.A,
                 B = colorDialog.Color.B,

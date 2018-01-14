@@ -21,8 +21,24 @@
                     <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="{Binding Name, Converter={StaticResource PascalCaseConverter}, FallbackValue=Key}" FontSize="12" Padding="8,0,0,0" VerticalAlignment="Center" Foreground="White" TextAlignment="Left"/>
-                <Grid Grid.Column="1">                    
-                    <Rectangle Fill="{Binding Value, FallbackValue=Gray, Converter={StaticResource ColorToSolidColorBrushValueConverter}}" />
+                <Grid Grid.Column="1" Margin="0,6,10,6">
+                    <Rectangle>
+                        <Rectangle.Fill>
+                            <DrawingBrush Viewport="0,0,1,1" TileMode="None">
+                                <DrawingBrush.Drawing>
+                                    <DrawingGroup>
+                                        <GeometryDrawing Brush="White">
+                                            <GeometryDrawing.Geometry>
+                                                <RectangleGeometry Rect="0,0,1,1" />
+                                            </GeometryDrawing.Geometry>
+                                        </GeometryDrawing>
+                                        <GeometryDrawing Brush="Black" Geometry="M 0,0 L1,0 0,1" />
+                                    </DrawingGroup>
+                                </DrawingBrush.Drawing>
+                            </DrawingBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Rectangle Fill="{Binding Value, FallbackValue=Transparent, Converter={StaticResource ColorToSolidColorBrushValueConverter}}" />
                     <Rectangle Fill="DarkGray" Width="1" HorizontalAlignment="Left" />
                 </Grid>
             </Grid>
