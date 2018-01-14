@@ -3,6 +3,7 @@ using Fuzz.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -249,7 +250,7 @@ namespace Fuzz
                 .Select(x =>
                 {
                     var name = x.Name.LocalName;
-                    var value = float.Parse(x.Attribute("Value").Value);
+                    var value = float.Parse(x.Attribute("Value").Value, CultureInfo.InvariantCulture);
 
                     return new Tuple<string, PropertyItem>(name, new PropertyItem
                     {

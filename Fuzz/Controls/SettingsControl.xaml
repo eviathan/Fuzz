@@ -19,7 +19,7 @@
                         <Setter Property="VerticalAlignment" Value="Center" />
                     </Style>
                 </StackPanel.Resources>
-                <Image Source="{StaticResource LogoSmall}" Width="200" Height="200" />
+                <Image Source="{StaticResource LogoSmall}" Width="200" Height="200" RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased"/>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="3.5*" />
